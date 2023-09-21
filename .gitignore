@@ -1,0 +1,21 @@
+# Node.js
+node_modules/
+npm-debug.log
+
+# Compiled files
+dist/
+*.js
+*.js.map
+*.d.ts
+
+# Dependency directories
+jspm_packages/
+
+# TypeScript
+*.tsbuildinfo
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
