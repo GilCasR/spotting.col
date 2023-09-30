@@ -22,3 +22,11 @@ export interface AircraftTypeAttributes {
     wing_span_ft: number;
     range_nautical_miles: number;
 }
+
+export interface AircraftAttributes {
+    id: string;
+    registration: string;
+    special_livery: boolean;
+    type: string;
+    aircraft_description: string;
+}

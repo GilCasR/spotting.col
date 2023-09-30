@@ -14,9 +14,9 @@ interface AircraftTypeAttributes {
     range_nautical_miles: number;
 }
 
-interface AircraftCreationAttributes extends AircraftTypeAttributes {}
+interface AircraftTypeCreationAttributes extends AircraftTypeAttributes {}
 
-class AircraftType extends Model<AircraftTypeAttributes, AircraftCreationAttributes> implements AircraftTypeAttributes {
+class AircraftType extends Model<AircraftTypeAttributes, AircraftTypeCreationAttributes> implements AircraftTypeAttributes {
     public id!: string;
     public model!: string;
     public max_speed_knots!: number;

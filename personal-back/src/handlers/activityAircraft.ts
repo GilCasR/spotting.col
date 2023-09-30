@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { AircraftType } from '../db';
-import { getAircraftData } from "../controller/aircraftController"
+import { v4 as uuidv4 } from "uuid"
+import { getAircraftData, createAircraft } from "../controller/aircraftController"
+
 
 const getAircraft = async (req: Request, res: Response) => {
     const manufacturer: string = req.params.manufacturer;
@@ -23,4 +25,29 @@ const getAircraft = async (req: Request, res: Response) => {
     }
 }
 
-module.exports = { getAircraft }
+const postAircraft = async (req: Request, res: Response) => {
+    try {
+        const {
+            registration,
+            special_livery,
+            type,
+            aircraft_description,
+        } = req.body
+        const id = uuidv4()
+        const responseData = await createAircraft(
+                id,
+                registration,
+                special_livery,
+                type,
+                aircraft_description,
+            )
+        res.status(200).json(responseData);
+    } catch (error) {
+        res.status(400).json({ error: (error as Error).message });
+    }
+}
+
+module.exports = { 
+    getAircraft,
+    postAircraft
+}

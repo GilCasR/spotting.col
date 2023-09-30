@@ -58,6 +58,7 @@ class Airport extends Model<AirportAttributes, AirportCreationAttributes> implem
           code: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true
           },
           elevation: {
             type: DataTypes.INTEGER,

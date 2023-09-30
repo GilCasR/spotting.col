@@ -1,9 +1,10 @@
 import axios from 'axios';
 import config from '../../config';
 import { AxiosResponse, AxiosError } from 'axios';
-import { AircraftTypeData, AircraftTypeAttributes } from './aircraftType.interface';
+import { AircraftTypeData, AircraftTypeAttributes, AircraftAttributes } from './aircraftType.interface';
 import { AircraftType } from '../db';
 import { v4 as uuidv4 } from "uuid"
+import { Aircraft } from '../db';
 
 export const getAircraftData = async (manufacturer: string, model: string) => {
     try {             
@@ -44,4 +45,36 @@ export const getAircraftData = async (manufacturer: string, model: string) => {
     } catch (error: any) {
         return error.message
     }
+}
+
+
+export const createAircraft =async (
+        id_: string,
+        registration_: string,
+        special_livery_: string,
+        type_: string,
+        aircraft_description_: string
+    ) => {
+        try {
+            let boolean: boolean
+            if (special_livery_ === "true") {
+                boolean = true;
+            } else if (special_livery_ === "false") {
+                boolean = false;
+            } else {
+                // Handle other cases here (e.g., set a default value or throw an error)
+                boolean = false; // Setting a default value (false in this case)
+            }
+            const aircraftData: AircraftAttributes = {
+                id: id_,
+                registration: registration_,
+                special_livery: boolean,
+                type: type_,
+                aircraft_description: aircraft_description_,
+            };
+            const newAircraft: Aircraft = await Aircraft.create(aircraftData);
+            return newAircraft
+        } catch (error: any) {
+            return error.message
+        }
 }
