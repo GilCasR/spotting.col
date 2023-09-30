@@ -17,6 +17,7 @@ export const getAirportData = async (code: string) => {
         const apiCountry: string = response.data.country.name
         const apiCountryCode: string = response.data.country.code
         const apiRegion: string = response.data.region.name
+        const apiCity: string = response.data.municipality
         const apiRunways: Runways[] = response.data.runways.map(el => {
             return {
                 length_ft: parseInt(el.length_ft),
@@ -36,7 +37,8 @@ export const getAirportData = async (code: string) => {
             country: apiCountry,
             countryCode: apiCountryCode,
             runways: apiRunways,
-            region: apiRegion
+            region: apiRegion,
+            city: apiCity
         };
         
         const newAirport = await Airport.create(airportInfo)

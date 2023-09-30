@@ -19,6 +19,7 @@ interface AirportAttributes {
     countryCode: string;
     runways: Runways[];
     region: string;
+    city: string;
 }
 
 interface AirportCreationAttributes extends AirportAttributes {}
@@ -34,6 +35,7 @@ class Airport extends Model<AirportAttributes, AirportCreationAttributes> implem
     public countryCode!: string;
     public runways!: Runways[];
     public region!: string;
+    public city!: string
 
   
     // You can also define class methods and other properties here if needed
@@ -78,6 +80,9 @@ class Airport extends Model<AirportAttributes, AirportCreationAttributes> implem
             type: DataTypes.ARRAY(DataTypes.JSONB),
             allowNull: false
           },region: {
+            type: DataTypes.STRING,
+            allowNull: false
+          },city: {
             type: DataTypes.STRING,
             allowNull: false
           }          

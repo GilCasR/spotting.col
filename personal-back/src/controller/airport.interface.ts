@@ -114,6 +114,7 @@ export interface AirportInfo {
     countryCode: string;
     runways: Runways[];
     region: string;
+    city: string;
 }       
 
 export interface Runways {
