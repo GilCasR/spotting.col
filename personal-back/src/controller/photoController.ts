@@ -5,7 +5,8 @@ export const createPhoto = async (
     id: string,
     photo_date: string, 
     photo_description: string, 
-    aircraftid: string
+    aircraftid: string,
+    link: string
     ) => {
     try {
         console.log(aircraftid);
@@ -24,6 +25,7 @@ export const createPhoto = async (
                 likes: zero,
                 photo_description: photo_description,
                 aircraft_id: aircraftid,
+                link: link
             }
             const newPhoto = await Photo.create(
                 photoData

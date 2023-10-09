@@ -11,7 +11,8 @@ interface PhotoAttributtes {
     photo_date: Date;
     views: number;
     likes: number;
-    photo_description: string
+    photo_description: string;
+    link: string
 }
 
 
@@ -22,6 +23,7 @@ class Photo extends Model<PhotoAttributtes> implements PhotoAttributtes{
     public views!: number;
     public likes!: number;
     public photo_description!: string
+    public link!: string
 
 
 
@@ -51,6 +53,9 @@ class Photo extends Model<PhotoAttributtes> implements PhotoAttributtes{
                 type: DataTypes.INTEGER,
                 allowNull: false
             },photo_description: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },link: {
                 type: DataTypes.STRING,
                 allowNull: false
             }

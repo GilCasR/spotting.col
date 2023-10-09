@@ -7,10 +7,11 @@ export const postPhoto = async (req: Request, res: Response) => {
         const {
             photo_date,
             photo_description,
-            aircraft_id
+            aircraft_id,
+            link
         } = req.body
         const id = uuidv4()
-        const response = await createPhoto(id, photo_date, photo_description, aircraft_id)
+        const response = await createPhoto(id, photo_date, photo_description, aircraft_id, link)
         res.status(200).json(response)
     } catch (error: any) {
         res.status(400).json({ error: (error as Error).message });
