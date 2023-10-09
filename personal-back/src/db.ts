@@ -22,6 +22,9 @@ Airline.initialize(sequelize);
 Aircraft.hasMany(Photo, { foreignKey: 'aircraft_Id' });
 Photo.belongsTo(Aircraft, { foreignKey: 'aircraft_Id' });
 
+AircraftType.hasMany(Aircraft, { foreignKey: 'aircraft_type_id' });
+Aircraft.belongsTo(AircraftType, { foreignKey: 'aircraft_type_id' });
+
 export {
   Photo,
   Airline,

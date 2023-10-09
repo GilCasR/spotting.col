@@ -33,6 +33,7 @@ class Photo extends Model<PhotoAttributtes> implements PhotoAttributtes{
             as: 'Aircraft'
         });
     }
+    
 
     public static initialize(sequelize: Sequelize) {
         Photo.init({

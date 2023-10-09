@@ -75,7 +75,12 @@ export const createAircraft =async (
                 type: type_,
                 aircraft_description: aircraft_description_,
             };
+            const aircraftType = await AircraftType.findByPk(aircraft_type)
             const newAircraft: Aircraft = await Aircraft.create(aircraftData);
+            if (aircraftType) {
+                console.log("found");
+                await (newAircraft as any).setAircraftType(aircraftType);
+            }         
             return newAircraft
         } catch (error: any) {
             return error.message

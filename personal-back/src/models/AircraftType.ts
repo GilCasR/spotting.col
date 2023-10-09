@@ -43,7 +43,6 @@ class AircraftType extends Model<AircraftTypeAttributes, AircraftTypeCreationAtt
       // Define the one-to-many relationship
       AircraftType.hasMany(models.AircraftModel, {
         foreignKey: 'aircraft_type_id', 
-        as: 'aircrafts', 
     });
     }
 

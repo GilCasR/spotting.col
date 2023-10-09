@@ -28,8 +28,6 @@ export const createPhoto = async (
             const newPhoto = await Photo.create(
                 photoData
             )
-            //await newPhoto.setAircraft(aircraft);
-            //await aircraft.addPhoto(newPhoto);
             await (newPhoto as any).setAircraft(aircraft);
             return newPhoto
         }
