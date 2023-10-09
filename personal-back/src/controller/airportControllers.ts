@@ -17,7 +17,7 @@ export const getAirportData = async (code: string) => {
         const apiCountry: string = response.data.country.name
         const apiCountryCode: string = response.data.country.code
         const apiRegion: string = response.data.region.name
-        const apiCity: string = response.data.municipality
+        const apiCity: string = response.data.region.local_code
         const apiRunways: Runways[] = response.data.runways.map(el => {
             return {
                 length_ft: parseInt(el.length_ft),

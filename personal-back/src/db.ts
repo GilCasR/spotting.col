@@ -4,9 +4,10 @@ import Airport from './models/Airport';
 import AircraftType from './models/AircraftType'
 import Aircraft from './models/Aircraft';
 import Photo from './models/Photo';
-import AircraftPhoto from './models/AircraftPhoto';
+//import AircraftPhoto from './models/AircraftPhoto';
+import Airline from './models/Airline';
 
-const sequelize = new Sequelize(`postgres://${config.DB_USER}:${config.DB_PASSWORD}@${config.DB_HOST}/spotting`, {
+const sequelize: Sequelize = new Sequelize(`postgres://${config.DB_USER}:${config.DB_PASSWORD}@${config.DB_HOST}/spotting`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -15,15 +16,19 @@ Airport.initialize(sequelize);
 AircraftType.initialize(sequelize);
 Aircraft.initialize(sequelize);
 Photo.initialize(sequelize);
-AircraftPhoto.initialize(sequelize);
+//AircraftPhoto.initialize(sequelize);
+Airline.initialize(sequelize);
 
+Aircraft.hasMany(Photo, { foreignKey: 'aircraft_Id' });
+Photo.belongsTo(Aircraft, { foreignKey: 'aircraft_Id' });
 
 export {
   Photo,
+  Airline,
   Airport,
   Aircraft,
   AircraftType,
-  AircraftPhoto,
+  //AircraftPhoto,
   sequelize as conn,
 }
 

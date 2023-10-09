@@ -3,8 +3,8 @@ import config from '../../config';
 import { AxiosResponse, AxiosError } from 'axios';
 import { AircraftTypeData, AircraftTypeAttributes, AircraftAttributes } from './aircraftType.interface';
 import { AircraftType } from '../db';
-import { v4 as uuidv4 } from "uuid"
 import { Aircraft } from '../db';
+import { v4 as uuidv4 } from "uuid";
 
 export const getAircraftData = async (manufacturer: string, model: string) => {
     try {             
@@ -18,6 +18,7 @@ export const getAircraftData = async (manufacturer: string, model: string) => {
         const responseData = response.data[0]
               
         const apiModel = responseData.model
+        const apiManufacturer = responseData.manufacturer
         const max_speed_api = Number(responseData.max_speed_knots)
         const ceiling_api = Number(responseData.ceiling_ft)
         const weight_api = Number(responseData.gross_weight_lbs)
@@ -30,6 +31,7 @@ export const getAircraftData = async (manufacturer: string, model: string) => {
         const aircraftInfo: AircraftTypeAttributes = {
             id: uuidv4(),
             model: apiModel,
+            manufacturer: apiManufacturer,
             max_speed_knots: max_speed_api,
             ceiling_ft: ceiling_api,
             gross_weight_lbs: weight_api,
@@ -53,7 +55,8 @@ export const createAircraft =async (
         registration_: string,
         special_livery_: string,
         type_: string,
-        aircraft_description_: string
+        aircraft_description_: string,
+        aircraft_type: string
     ) => {
         try {
             let boolean: boolean
@@ -74,6 +77,38 @@ export const createAircraft =async (
             };
             const newAircraft: Aircraft = await Aircraft.create(aircraftData);
             return newAircraft
+        } catch (error: any) {
+            return error.message
+        }
+}
+
+export const createAircraftType = async (
+        id: string,
+        model: string,
+        manufacturer: string,
+        max_speed_knots: number,
+        ceiling_ft: number,
+        gross_weight_lbs: number,
+        length_ft: number, 
+        height_ft: number,
+        wing_span_ft: number,
+        range_nautical_miles: number,
+    ) => {
+        try {
+            const aircraftTypeData: AircraftTypeAttributes = {
+                id,
+                model,
+                manufacturer,
+                max_speed_knots,
+                ceiling_ft,
+                gross_weight_lbs,
+                length_ft, 
+                height_ft,
+                wing_span_ft,
+                range_nautical_miles
+            }
+            const newAircraftType: AircraftType = await AircraftType.create(aircraftTypeData)
+            return newAircraftType
         } catch (error: any) {
             return error.message
         }

@@ -24,6 +24,7 @@
     "qs": "^6.11.2",
     "sequelize": "^6.33.0",
     "sequelize-cli": "^6.6.1",
+    "sequelize-typescript": "^2.1.5",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

@@ -2,6 +2,7 @@ const { Router } = require('express');
 const express = require("express");
 import airportRouter from "./airportRouter";
 import aircraftRouter from "./aircraftRouter";
+import photoRouter from "./photoRouter"
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -14,8 +15,9 @@ const router = Router();
 
 router.use(express.json());
 
-router.use("/airports", airportRouter)
+router.use("/airport", airportRouter)
 router.use("/aircraft", aircraftRouter)
+router.use("/photo", photoRouter)
 
 module.exports = router;
 

@@ -14,6 +14,7 @@ export interface AircraftTypeData {
 export interface AircraftTypeAttributes {
     id: string;
     model: string;
+    manufacturer: string;
     max_speed_knots: number;
     ceiling_ft: number;
     gross_weight_lbs: number;

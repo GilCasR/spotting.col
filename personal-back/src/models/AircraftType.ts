@@ -1,10 +1,16 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
+import { Aircraft } from "../db";
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
+
+interface Models {
+  AircraftModel: typeof Aircraft
+}
 
 interface AircraftTypeAttributes {
     id: string;
     model: string;
+    manufacturer: string;
     max_speed_knots: number;
     ceiling_ft: number;
     gross_weight_lbs: number;
@@ -19,6 +25,7 @@ interface AircraftTypeCreationAttributes extends AircraftTypeAttributes {}
 class AircraftType extends Model<AircraftTypeAttributes, AircraftTypeCreationAttributes> implements AircraftTypeAttributes {
     public id!: string;
     public model!: string;
+    public manufacturer!: string;
     public max_speed_knots!: number;
     public ceiling_ft!: number;
     public gross_weight_lbs!: number;
@@ -32,6 +39,14 @@ class AircraftType extends Model<AircraftTypeAttributes, AircraftTypeCreationAtt
   
     // Define associations, validations, etc., if necessary
   
+    static associate(models: Models) {
+      // Define the one-to-many relationship
+      AircraftType.hasMany(models.AircraftModel, {
+        foreignKey: 'aircraft_type_id', 
+        as: 'aircrafts', 
+    });
+    }
+
     // This static method initializes the model and defines the schema
     public static initialize(sequelize: Sequelize) {
         AircraftType.init(
@@ -42,6 +57,9 @@ class AircraftType extends Model<AircraftTypeAttributes, AircraftTypeCreationAtt
             primaryKey: true,
           },
           model: {
+            type: DataTypes.STRING,
+            allowNull: false,
+          },manufacturer: {
             type: DataTypes.STRING,
             allowNull: false,
           },

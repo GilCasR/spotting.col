@@ -7,7 +7,7 @@ import morgan from 'morgan';
 
 import './db'; // Importing a file with no exports
 
-const server = express();
+const server: Application = express();
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));

@@ -1,8 +1,9 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
-import { AircraftPhoto } from "../db"; // Adjust the path to match your project structure
+import { HasMany, BelongsTo } from 'sequelize-typescript';
+import { Aircraft } from "../db"; // Adjust the path to match your project structure
 
 interface Models {
-    AircraftModel: typeof AircraftPhoto;
+    AircraftModel: typeof Aircraft;
 }
 
 interface PhotoAttributtes {
@@ -13,6 +14,8 @@ interface PhotoAttributtes {
     photo_description: string
 }
 
+
+
 class Photo extends Model<PhotoAttributtes> implements PhotoAttributtes{
     public id!: string;
     public photo_date!: Date;
@@ -20,10 +23,14 @@ class Photo extends Model<PhotoAttributtes> implements PhotoAttributtes{
     public likes!: number;
     public photo_description!: string
 
+
+
+
     static associate(models: Models) {
         // Define the association here
         Photo.belongsTo(models.AircraftModel, {
-            foreignKey: 'aircraft_Id', // This should be the name of the foreign key column in the Photo table
+            foreignKey: 'aircraft_id', // Foreign key in the PhotoModel
+            as: 'Aircraft'
         });
     }
 
