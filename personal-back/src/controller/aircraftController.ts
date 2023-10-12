@@ -2,8 +2,11 @@ import axios from 'axios';
 import config from '../../config';
 import { AxiosResponse, AxiosError } from 'axios';
 import { AircraftTypeData, AircraftTypeAttributes, AircraftAttributes } from './aircraftType.interface';
-import { AircraftType } from '../db';
-import { Aircraft } from '../db';
+import { 
+    AircraftType,
+    Aircraft,
+    Airline
+} from '../db';
 import { v4 as uuidv4 } from "uuid";
 
 export const getAircraftData = async (manufacturer: string, model: string) => {
@@ -50,13 +53,14 @@ export const getAircraftData = async (manufacturer: string, model: string) => {
 }
 
 
-export const createAircraft =async (
+export const createAircraft = async (
         id_: string,
         registration_: string,
         special_livery_: string,
         type_: string,
         aircraft_description_: string,
-        aircraft_type: string
+        aircraft_type: string,
+        airline_: string
     ) => {
         try {
             let boolean: boolean
@@ -81,6 +85,11 @@ export const createAircraft =async (
                 console.log("found");
                 await (newAircraft as any).setAircraftType(aircraftType);
             }         
+            const airline = await Airline.findByPk(airline_)
+            if(airline){
+                console.log("airline found");
+                await (newAircraft as any).setAirline(airline) 
+            }
             return newAircraft
         } catch (error: any) {
             return error.message

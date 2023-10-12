@@ -8,6 +8,8 @@ import {
 } from "../controller/aircraftController"
 
 
+// AIRCRAFT TYPE CONTROLLERS 
+
 const getAircraftType = async (req: Request, res: Response) => {
     const manufacturer: string = req.params.manufacturer;
     const queryModel: string = req.params.model;
@@ -21,30 +23,6 @@ const getAircraftType = async (req: Request, res: Response) => {
             let responseData = await getAircraftData(manufacturer, queryModel)       
             res.status(200).json(responseData);
         }
-    } catch (error) {
-        res.status(400).json({ error: (error as Error).message });
-    }
-}
-
-const postAircraft = async (req: Request, res: Response) => {
-    try {
-        const {
-            registration,
-            special_livery,
-            type,
-            aircraft_description,
-            aircraft_type
-        } = req.body
-        const id = uuidv4()
-        const responseData = await createAircraft(
-                id,
-                registration,
-                special_livery,
-                type,
-                aircraft_description,
-                aircraft_type
-            )
-        res.status(200).json(responseData);
     } catch (error) {
         res.status(400).json({ error: (error as Error).message });
     }
@@ -81,6 +59,36 @@ const postAircraftType = async (req: Request, res: Response) => {
         res.status(400).json({ error: (error as Error).message });
     }
 }
+
+// AIRCRAFT CONTROLLERS 
+
+const postAircraft = async (req: Request, res: Response) => {
+    try {
+        const {
+            registration,
+            special_livery,
+            type,
+            aircraft_description,
+            aircraft_type,
+            airline
+        } = req.body
+        const id = uuidv4()
+        const responseData = await createAircraft(
+                id,
+                registration,
+                special_livery,
+                type,
+                aircraft_description,
+                aircraft_type,
+                airline
+            )
+        res.status(200).json(responseData);
+    } catch (error) {
+        res.status(400).json({ error: (error as Error).message });
+    }
+}
+
+
 
 module.exports = { 
     getAircraftType,
