@@ -1,9 +1,13 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
 import { HasMany, BelongsTo } from 'sequelize-typescript';
-import { Aircraft } from "../db"; // Adjust the path to match your project structure
+import { 
+    Aircraft,
+    Airport
+} from "../db"; // Adjust the path to match your project structure
 
 interface Models {
     AircraftModel: typeof Aircraft;
+    AirportModel: typeof Airport;
 }
 
 interface PhotoAttributtes {
@@ -33,6 +37,9 @@ class Photo extends Model<PhotoAttributtes> implements PhotoAttributtes{
         Photo.belongsTo(models.AircraftModel, {
             foreignKey: 'aircraft_id', // Foreign key in the PhotoModel
             as: 'Aircraft'
+        });
+        Photo.belongsTo(models.AirportModel, {
+            foreignKey: 'airport_id', // Foreign key in the PhotoModel
         });
     }
     

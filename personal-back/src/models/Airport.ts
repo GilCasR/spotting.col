@@ -1,11 +1,18 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
+import { 
+  Photo 
+} from "../db";
+
+
 interface Runways {
   length_ft: number;
   length_m: number;
   nameA: string;
   nameB: string;    
+}
+
+interface Models {
+  PhotoModel: typeof Photo
 }
 
 interface AirportAttributes {
@@ -37,12 +44,15 @@ class Airport extends Model<AirportAttributes, AirportCreationAttributes> implem
     public region!: string;
     public city!: string
 
-  
-    // You can also define class methods and other properties here if needed
-  
-    // Define associations, validations, etc., if necessary
-  
-    // This static method initializes the model and defines the schema
+    static associate(models: Models) {
+      // Define the association here
+      Airport.hasMany(models.PhotoModel, {
+          foreignKey: 'airport_id', // Foreign key in the PhotoModel
+      });
+  }
+    
+
+
     public static initialize(sequelize: Sequelize) {
       Airport.init(
         {
