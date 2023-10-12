@@ -15,7 +15,6 @@ const getAirport = async (req: Request, res: Response) => {
             res.status(200).json(airportDb)
         }else{
             console.log("api use");
-            
             let responseData = await getAirportData(queryCode)       
             res.status(200).json(responseData);
         }

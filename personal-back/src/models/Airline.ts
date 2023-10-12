@@ -1,5 +1,11 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
-//import { AircraftPhoto } from "../db"; // Adjust the path to match your project structure
+import { Aircraft } from "../db"
+import { addOptions } from "sequelize-typescript";
+
+interface Models {
+    AircraftModel: typeof Aircraft
+} 
+
 
 
 interface AirlineAttributtes {
@@ -25,8 +31,11 @@ class Airline extends Model<AirlineAttributtes> implements AirlineAttributtes{
     public country_code!: string;
     public logo!: string;
 
-    // static associate(models: Models) {
-    // }
+    static associate(models: Models) {
+        Airline.hasMany(models.AircraftModel, {
+            foreignKey: "airline_id"
+          });
+    }  
 
     public static initialize(sequelize: Sequelize) {
         Airline.init({

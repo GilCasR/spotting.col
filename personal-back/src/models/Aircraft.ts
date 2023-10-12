@@ -1,6 +1,10 @@
 import { Sequelize, Model, DataTypes, HasMany} from "sequelize";
 // import { HasMany, BelongsTo } from 'sequelize-typescript';
-import { Photo, AircraftType } from "../db";
+import { 
+  Photo, 
+  AircraftType,
+  Airline
+} from "../db";
 import { ForeignKey } from "sequelize-typescript";
 //import { AircraftPhoto, AircraftType } from "../db"
 // Exportamos una funcion que define el modelo
@@ -8,7 +12,8 @@ import { ForeignKey } from "sequelize-typescript";
 
 interface Models {
     PhotoModel: typeof Photo;
-    AircraftTypeModel : typeof AircraftType
+    AircraftTypeModel : typeof AircraftType;
+    AirlineModel: typeof Airline
 }
 
 
@@ -38,6 +43,9 @@ class Aircraft extends Model<AircraftAttributes, AircraftCreationAttributes> imp
       });
       Aircraft.belongsTo(models.AircraftTypeModel, {
         foreignKey: "aircraft_type_id"
+      }); 
+      Aircraft.belongsTo(models.AirlineModel, {
+        foreignKey: "airline_id"
       }); 
     }
   
