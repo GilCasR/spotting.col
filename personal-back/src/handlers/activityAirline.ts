@@ -37,6 +37,16 @@ const postAirline = async (req: Request, res: Response) => {
     }
 }
 
+const getAllAirlines = async (req: Request, res: Response) => {
+    try {
+        const response = await Airline.findAll();
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(400).json({ error: (error as Error).message });
+    }
+}
+
 module.exports = {
-    postAirline
+    postAirline,
+    getAllAirlines
 }

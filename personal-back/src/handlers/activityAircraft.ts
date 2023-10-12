@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
-import { AircraftType } from '../db';
+import { 
+    AircraftType,
+    Aircraft
+ } from '../db';
 import { v4 as uuidv4 } from "uuid"
 import { 
     getAircraftData, 
@@ -88,10 +91,30 @@ const postAircraft = async (req: Request, res: Response) => {
     }
 }
 
+const getAllAircraftTypes = async (req: Request, res: Response) => {
+    try {
+        const response = await AircraftType.findAll();
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(400).json({ error: (error as Error).message });
+    }
+} 
+
+const getAllAircrafts = async (req: Request, res: Response) => {
+    try {
+        const response = await Aircraft.findAll();
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(400).json({ error: (error as Error).message });
+    }
+}
+
 
 
 module.exports = { 
     getAircraftType,
     postAircraft,
-    postAircraftType
+    postAircraftType,
+    getAllAircraftTypes,
+    getAllAircrafts
 }
