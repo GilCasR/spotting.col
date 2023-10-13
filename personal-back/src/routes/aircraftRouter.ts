@@ -1,10 +1,12 @@
 import { Router } from 'express';
+import airlineRouter from './airlineRouter';
 const { 
     getAircraftType, 
     postAircraft, 
     postAircraftType,
     getAllAircraftTypes,
-    getAllAircrafts
+    getAllAircrafts,
+    getAircraftById
 } = require("../handlers/activityAircraft")
 
 const aircraftRouter = Router();
@@ -12,6 +14,7 @@ const aircraftRouter = Router();
 // Aircraft Data
 
 aircraftRouter.post("/", postAircraft);
+aircraftRouter.get("/byId/:id", getAircraftById)
 aircraftRouter.get("/all", getAllAircrafts);
 
 // Aircraft Type Data

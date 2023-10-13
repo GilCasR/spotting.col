@@ -56,7 +56,8 @@ export const updatePhoto =async (
         id: string,
         photo_date: Date | null,
         photo_description: string | null,
-        link: string | null
+        link: string | null,
+        like: boolean | null
     ) => {
     
         try {
@@ -74,6 +75,11 @@ export const updatePhoto =async (
             if(photo_date) updateFields.photo_date = photo_date
             if(photo_description) updateFields.photo_description = photo_description
             if(link) updateFields.link = link
+
+            if(like){
+                photo.likes += 1;
+                await photo.save()
+            }
     
             await photo.update(updateFields)
             return photo

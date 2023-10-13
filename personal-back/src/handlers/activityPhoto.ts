@@ -55,13 +55,15 @@ export const patchPhoto = async (req: Request, res: Response) => {
             views,
             likes,
             photo_description,
-            link
+            link,
+            like
         } = req.body
         const response = await updatePhoto(
             id,
             photo_date,
             photo_description,
-            link
+            link, 
+            like
         )
         res.status(200).json(response)
     } catch (error) {
@@ -91,8 +93,7 @@ export const getPhotoById = async (req: Request, res: Response) => {
                 res.status(200).json(photoById)
             }else{
                 throw new Error(`photo with id ${id} not found`)
-            }
-            
+            }   
         }
     } catch (error) {
         res.status(400).json({ error: (error as Error).message });

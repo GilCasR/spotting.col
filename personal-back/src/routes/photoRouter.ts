@@ -11,6 +11,6 @@ const photoRouter = Router();
 photoRouter.post("/", postPhoto);
 photoRouter.get("/", getAllPhotos);
 photoRouter.get("/:id", getPhotoById);
-photoRouter.patch("/:id", patchPhoto)
+photoRouter.patch("/:id", patchPhoto);
 
 export default photoRouter

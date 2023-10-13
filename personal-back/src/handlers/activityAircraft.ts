@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
 import { 
     AircraftType,
-    Aircraft
+    Aircraft,
+    Photo,
+    Airline
  } from '../db';
 import { v4 as uuidv4 } from "uuid"
 import { 
@@ -109,6 +111,34 @@ const getAllAircrafts = async (req: Request, res: Response) => {
     }
 }
 
+const getAircraftById = async (req: Request, res: Response) => {
+    try {
+        const id: string = req.params.id        
+        const aircraftById = await Aircraft.findByPk(id, {
+            include: [
+                {
+                    model: Photo
+                },
+                {
+                    model: AircraftType,
+                    attributes: ['id', 'model', 'manufacturer']
+                },
+                {
+                    model: Airline,
+                    attributes: ['id', 'name', 'iata_code']
+                }
+                ]
+        })
+        if(aircraftById){
+            res.status(200).json(aircraftById);
+        }else{
+            throw new Error(`aircraft with id ${id} not found`)
+        }
+    } catch (error) {
+        res.status(400).json({ error: (error as Error).message });
+    }
+}
+
 
 
 module.exports = { 
@@ -116,5 +146,6 @@ module.exports = {
     postAircraft,
     postAircraftType,
     getAllAircraftTypes,
-    getAllAircrafts
+    getAllAircrafts,
+    getAircraftById
 }
