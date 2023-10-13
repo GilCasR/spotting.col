@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
-import { createPhoto } from "../controller/photoController";
+import { 
+    createPhoto,
+    updatePhoto
+ } from "../controller/photoController";
 import {
     Photo, 
     Aircraft,
@@ -40,6 +43,28 @@ export const getAllPhotos = async (req: Request, res: Response) => {
           });
           
           
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(400).json({ error: (error as Error).message });
+    }
+}
+
+export const patchPhoto = async (req: Request, res: Response) => {
+    try {
+        const id: string = req.params.id
+        const {
+            photo_date,
+            views,
+            likes,
+            photo_description,
+            link
+        } = req.body
+        const response = await updatePhoto(
+            id,
+            photo_date,
+            photo_description,
+            link
+        )
         res.status(200).json(response)
     } catch (error) {
         res.status(400).json({ error: (error as Error).message });

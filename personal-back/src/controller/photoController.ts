@@ -1,9 +1,16 @@
 import { Photo, Aircraft, Airport } from "../db"
 
+interface UpdateAttributtes {
+    photo_date: Date | undefined,
+    views: undefined,
+    likes: undefined,
+    photo_description: string | undefined,
+    link: string | undefined
+}
 
 export const createPhoto = async (
     id: string,
-    photo_date: string, 
+    photo_date: Date, 
     photo_description: string, 
     aircraftid: string,
     link: string,
@@ -25,7 +32,7 @@ export const createPhoto = async (
             const zero = 0
             const photoData = {
                 id: id,
-                photo_date: date,
+                photo_date: photo_date,
                 views: zero,
                 likes: zero,
                 photo_description: photo_description,
@@ -43,4 +50,34 @@ export const createPhoto = async (
     } catch (error) {
         return error
     }        
+}
+
+export const updatePhoto =async (
+        id: string,
+        photo_date: Date | null,
+        photo_description: string | null,
+        link: string | null
+    ) => {
+    
+        try {
+            const photo = await Photo.findByPk(id)
+            if(!photo) throw new Error(`photo with id ${id} not found`)
+    
+            const updateFields: UpdateAttributtes = {
+                photo_date: undefined,
+                views: undefined,
+                likes: undefined,
+                photo_description: undefined,
+                link: undefined
+            }
+    
+            if(photo_date) updateFields.photo_date = photo_date
+            if(photo_description) updateFields.photo_description = photo_description
+            if(link) updateFields.link = link
+    
+            await photo.update(updateFields)
+            return photo
+        } catch (error: any) {
+            return error.message
+        }
 }

@@ -1,5 +1,6 @@
 import { 
-    Airline 
+    Airline,
+    Airport
 } from "../db";
 
 interface AirlineAttributtes {
@@ -50,6 +51,12 @@ export const createAirline = async (
                 logo,
             }
             const newAirline = await Airline.create(airlineData)
+            airports.map(async (el) => {
+                const airport = await Airport.findByPk(el)
+                if(airport){
+                    await   (newAirline as any).addAirport(airport)
+                }
+            })
             return newAirline
         } catch (error: any) {
             return error.message

@@ -9,6 +9,6 @@ const airlineRouter = Router();
 
 airlineRouter.post("/", postAirline);
 airlineRouter.get("/", getAllAirlines);
-airlineRouter.patch("/:id", patchAirline)
+airlineRouter.patch("/:id", patchAirline);
 
 export default airlineRouter

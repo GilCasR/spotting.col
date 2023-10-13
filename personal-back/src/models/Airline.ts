@@ -1,9 +1,10 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
-import { Aircraft } from "../db"
+import { Aircraft, Airport } from "../db"
 import { addOptions } from "sequelize-typescript";
 
 interface Models {
     AircraftModel: typeof Aircraft
+    AirportModel: typeof Airport
 } 
 
 
@@ -35,6 +36,10 @@ class Airline extends Model<AirlineAttributtes> implements AirlineAttributtes{
         Airline.hasMany(models.AircraftModel, {
             foreignKey: "airline_id"
           });
+        Airline.belongsToMany(models.AirportModel, {
+            through: "AirlineAirport",
+            foreignKey: "airline_id",
+        });
     }  
 
     public static initialize(sequelize: Sequelize) {

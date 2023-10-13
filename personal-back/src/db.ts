@@ -31,6 +31,16 @@ Aircraft.belongsTo(Airline, { foreignKey: 'airline_id' });
 Airport.hasMany(Photo, { foreignKey: 'airport_id' });
 Photo.belongsTo(Airport, { foreignKey: 'airport_id' });
 
+Airport.belongsToMany(Airline, {
+  through: "AirlineAirport",
+  foreignKey: "airport_id",
+});
+
+Airline.belongsToMany(Airport, {
+  through: "AirlineAirport",
+  foreignKey: "airline_id",
+});
+
 export {
   Photo,
   Airline,
