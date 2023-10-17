@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import airlineRouter from './airlineRouter';
 const { 
     getAircraftType, 
     postAircraft, 
@@ -9,17 +8,20 @@ const {
     getAircraftById
 } = require("../handlers/activityAircraft")
 
+const { jwtAdminMiddleware } = require ("../handlers/activityJwt")
+
 const aircraftRouter = Router();
+
 
 // Aircraft Data
 
-aircraftRouter.post("/", postAircraft);
-aircraftRouter.get("/byId/:id", getAircraftById)
+aircraftRouter.post("/", jwtAdminMiddleware, postAircraft);
+aircraftRouter.get("/byId/:id", getAircraftById);
 aircraftRouter.get("/all", getAllAircrafts);
 
 // Aircraft Type Data
 
-aircraftRouter.post("/:manufacturer/:model", postAircraftType);
+aircraftRouter.post("/:manufacturer/:model", jwtAdminMiddleware, postAircraftType);
 aircraftRouter.get("/:manufacturer/:model", getAircraftType);
 aircraftRouter.get("/allTypes", getAllAircraftTypes);
 

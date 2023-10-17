@@ -6,11 +6,13 @@ const {
     getPhotoById
 } = require ("../handlers/activityPhoto")
 
+const { jwtAdminMiddleware } = require ("../handlers/activityJwt")
+
 const photoRouter = Router();
 
-photoRouter.post("/", postPhoto);
+photoRouter.post("/", jwtAdminMiddleware, postPhoto);
 photoRouter.get("/", getAllPhotos);
 photoRouter.get("/:id", getPhotoById);
-photoRouter.patch("/:id", patchPhoto);
+photoRouter.patch("/:id", jwtAdminMiddleware, patchPhoto);
 
 export default photoRouter

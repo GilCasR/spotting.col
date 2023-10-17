@@ -39,12 +39,10 @@ export const createPhoto = async (
                 aircraft_id: aircraftid,
                 link: link
             }
-            const newPhoto = await Photo.create(
-                photoData
-            )
+            const newPhoto = await Photo.create(photoData);
             await (newPhoto as any).setAircraft(aircraft);
-            await (newPhoto as any).setAirport(airport)
-            return newPhoto
+            await (newPhoto as any).setAirport(airport);
+            return newPhoto;
         }
        
     } catch (error) {

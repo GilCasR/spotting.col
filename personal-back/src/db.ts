@@ -4,7 +4,7 @@ import Airport from './models/Airport';
 import AircraftType from './models/AircraftType'
 import Aircraft from './models/Aircraft';
 import Photo from './models/Photo';
-//import AircraftPhoto from './models/AircraftPhoto';
+import User from './models/User';
 import Airline from './models/Airline';
 
 const sequelize: Sequelize = new Sequelize(`postgres://${config.DB_USER}:${config.DB_PASSWORD}@${config.DB_HOST}/spotting`, {
@@ -16,7 +16,7 @@ Airport.initialize(sequelize);
 AircraftType.initialize(sequelize);
 Aircraft.initialize(sequelize);
 Photo.initialize(sequelize);
-//AircraftPhoto.initialize(sequelize);
+User.initialize(sequelize);
 Airline.initialize(sequelize);
 
 Aircraft.hasMany(Photo, { foreignKey: 'aircraft_Id' });
@@ -47,7 +47,7 @@ export {
   Airport,
   Aircraft,
   AircraftType,
-  //AircraftPhoto,
+  User,
   sequelize as conn,
 }
 

@@ -15,6 +15,7 @@ interface ENV {
     PORT: number | undefined;
     API_KEY: string | undefined;
     AIRCRAFT_API_KEY: string | undefined;
+    JWT_SECRET: string | undefined;
 }
 
 interface Config {
@@ -24,6 +25,7 @@ interface Config {
     PORT: number;
     API_KEY: string;
     AIRCRAFT_API_KEY: string;
+    JWT_SECRET: string;
 }
 
 // Loading process.env as ENV interface
@@ -35,7 +37,8 @@ const getConfig = (): ENV => {
     DB_HOST: process.env.DB_HOST,
     PORT: process.env.PORT ? Number(process.env.PORT) : undefined,
     API_KEY: process.env.API_KEY,
-    AIRCRAFT_API_KEY: process.env.AIRCRAFT_API_KEY
+    AIRCRAFT_API_KEY: process.env.AIRCRAFT_API_KEY,
+    JWT_SECRET: process.env.JWT_SECRET
   };
 };
 
