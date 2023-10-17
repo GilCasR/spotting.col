@@ -56,14 +56,16 @@ export const patchPhoto = async (req: Request, res: Response) => {
             likes,
             photo_description,
             link,
-            like
+            like,
+            active
         } = req.body
         const response = await updatePhoto(
             id,
             photo_date,
             photo_description,
             link, 
-            like
+            like,
+            active
         )
         res.status(200).json(response)
     } catch (error) {

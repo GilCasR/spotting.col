@@ -6,6 +6,7 @@ interface UpdateAttributtes {
     likes: undefined,
     photo_description: string | undefined,
     link: string | undefined
+    is_active: boolean | undefined
 }
 
 export const createPhoto = async (
@@ -37,7 +38,8 @@ export const createPhoto = async (
                 likes: zero,
                 photo_description: photo_description,
                 aircraft_id: aircraftid,
-                link: link
+                link: link,
+                is_active: true
             }
             const newPhoto = await Photo.create(photoData);
             await (newPhoto as any).setAircraft(aircraft);
@@ -55,7 +57,8 @@ export const updatePhoto =async (
         photo_date: Date | null,
         photo_description: string | null,
         link: string | null,
-        like: boolean | null
+        like: boolean | null,
+        active: boolean | null
     ) => {
     
         try {
@@ -67,12 +70,17 @@ export const updatePhoto =async (
                 views: undefined,
                 likes: undefined,
                 photo_description: undefined,
-                link: undefined
+                link: undefined,
+                is_active: undefined
             }
     
             if(photo_date) updateFields.photo_date = photo_date
             if(photo_description) updateFields.photo_description = photo_description
             if(link) updateFields.link = link
+            if(active){
+                photo.is_active = !photo.is_active
+                await photo.save()
+            }
 
             if(like){
                 photo.likes += 1;

@@ -18,7 +18,8 @@ export const createAdmin = async (
             user_password: hashPassword,
             user_email: email,
             user_image: image,
-            role: 'admin'
+            role: 'admin',
+            is_active: true
         }
         console.log(adminData);
         
@@ -47,7 +48,8 @@ export const userLogin = async (email: string, password: string) => {
     try {
         const user = await User.findOne({
             where: {
-                user_email: email
+                user_email: email,
+                is_active: true
             }
         })
         if(!user) return null

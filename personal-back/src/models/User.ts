@@ -6,7 +6,8 @@ interface UserAttributtes {
     user_password: string;
     user_email: string;
     user_image: string;
-    role: string
+    role: string;
+    is_active: boolean
 }
 
 
@@ -19,6 +20,7 @@ class User extends Model<UserAttributtes> implements UserAttributtes{
     public user_email!: string;
     public user_image!: string;
     public role!: string;
+    is_active!: boolean;
 
 
 
@@ -49,6 +51,9 @@ class User extends Model<UserAttributtes> implements UserAttributtes{
                 allowNull: false,
             },role: {
                 type: DataTypes.STRING,
+                allowNull: false
+            },is_active: {
+                type: DataTypes.BOOLEAN,
                 allowNull: false
             }
         },

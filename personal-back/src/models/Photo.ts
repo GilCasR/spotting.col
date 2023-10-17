@@ -16,7 +16,8 @@ interface PhotoAttributtes {
     views: number;
     likes: number;
     photo_description: string;
-    link: string
+    link: string;
+    is_active: boolean
 }
 
 
@@ -28,6 +29,7 @@ class Photo extends Model<PhotoAttributtes> implements PhotoAttributtes{
     public likes!: number;
     public photo_description!: string
     public link!: string
+    public is_active!: boolean;
 
 
 
@@ -64,6 +66,9 @@ class Photo extends Model<PhotoAttributtes> implements PhotoAttributtes{
                 allowNull: false
             },link: {
                 type: DataTypes.STRING,
+                allowNull: false
+            },is_active: {
+                type: DataTypes.BOOLEAN,
                 allowNull: false
             }
         },
