@@ -40,12 +40,14 @@ export const postAdmin = async (req: Request, res: Response) => {
 }
 
 export const getUserLogin = async (req: Request, res: Response) => {
-    try {
+    try {       
         const {
             email,
             password 
         } = req.body
         const loginValidation = await userLogin(email, password)
+        console.log(loginValidation);
+        
         if(loginValidation === null){
             res.status(404).json(`user with email ${email} not found`)
         }else if(loginValidation === false){

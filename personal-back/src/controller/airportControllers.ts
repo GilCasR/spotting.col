@@ -4,6 +4,7 @@ import config from '../../config';
 import { AirportData, AirportInfo, Runways } from "./airport.interface"
 import { Airport } from '../db';
 import { v4 as uuidv4 } from "uuid"
+import { log } from 'console';
 
 export const getAirportData = async (code: string) => {
     try {
@@ -45,6 +46,8 @@ export const getAirportData = async (code: string) => {
 
         return newAirport;
     } catch (error: any) {
+        console.log(error);
+        
         return error.message
     }
 }

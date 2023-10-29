@@ -7,6 +7,6 @@ const {
 const userRouter = Router();
 
 userRouter.post("/createAdmin", postAdmin);
-userRouter.get("/login", getUserLogin);
+userRouter.post("/login", getUserLogin);
 
 export default userRouter
